@@ -79,7 +79,7 @@ const Transfer = () => {
 	}
 
 	useEffect(() => {
-		const { phone, amount } = requestBody
+		const { phone = '', amount = '' } = requestBody
 		const phone_ = phone.split(' ').join('')
 		setIsDisabled(
 			() =>

@@ -1,6 +1,6 @@
 'use client'
 
-import { ADMIN_ADDRESS, NETWORK, TEMP_WALLET } from '@/constants'
+import { ADMIN_ADDRESS, NETWORK, USDC } from '@/constants'
 import { useAuth, useDebouncedEffect } from '@/hooks'
 import {
 	customTrim,
@@ -956,8 +956,30 @@ const MainContextProvider = ({ children }) => {
 			.finally(() => setShowModal(() => false))
 	}
 
-	const transfer = async (amount, res) => {
+	const transfer = async ({ totalASADue, res }) => {
+		let asaInfo = {}
 		if (res.success && res.data?.walletAddress) {
+			asaInfo = await getASAInfo(USDC)
+			const asaBal = (await getBalance(USDC)) / 10 ** asaInfo?.decimals
+			if (asaBal < totalASADue) {
+				setStage3((x) => ({
+					...x,
+					processing: false,
+					description: `Insufficient ${asaInfo.unit} balance: ${customTrim(
+						asaBal,
+						3
+					)}. Required balance: ${customTrim(totalASADue, 3)}`,
+					complete: true,
+				}))
+				setCanCloseModal(() => true)
+				return {
+					success: false,
+					message: `Insufficient ${asaInfo.unit} balance: ${customTrim(
+						asaBal,
+						3
+					)}. Required balance: ${customTrim(totalASADue, 3)}`,
+				}
+			}
 		}
 	}
 

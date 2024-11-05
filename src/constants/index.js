@@ -1,6 +1,7 @@
 export const NETWORK = process.env.NEXT_PUBLIC_NETWORK
 export const ADMIN_ADDRESS = process.env.NEXT_PUBLIC_ADMIN_ADDRESS
 export const TEMP_WALLET = process.env.NEXT_PUBLIC_TEMP_WALLET
+export const USDC = process.env.NEXT_PUBLIC_USDC
 export const PERA_FETCH_PROPERTIES_COLLECTIBLE = {
 	asset_id: 1173059803,
 	name: 'Gunny Hero: Hazel',

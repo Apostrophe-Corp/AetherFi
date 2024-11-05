@@ -353,6 +353,7 @@ const Airdrop = () => {
 			<button
 				type={'submit'}
 				className={cf(s.wMax, s.flex, s.spaceXBetween, p.subBtn)}
+				disabled={isDisabled}
 			>
 				<span className={cf(s.dInlineBlock)}>Create</span>
 				<IoGiftOutline className={cf(s.dInlineBlock, p.subIcon)} />

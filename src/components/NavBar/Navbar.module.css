@@ -1,0 +1,74 @@
+.parent {
+    padding: 16px 0;
+}
+
+.firstPart {}
+
+.branding {
+    margin-right: 46px;
+}
+
+.brandingImage {
+    width: 152px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.action {
+    color: #0A0D14;
+    text-align: center;
+    font-family: var(--font-inter);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21.28px;
+    /* 133% */
+    letter-spacing: -0.27px;
+    margin-right: 30px;
+    padding: 5px;
+    border: none;
+    background: #fff;
+}
+
+.secondPart {}
+
+.connectWallet {
+    padding: 13px 20px;
+    border-radius: 12px;
+    border: 1px solid #0D61F8;
+    background: #FFF;
+    color: #0D61F8;
+    text-align: center;
+    font-family: var(--font-inter);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+    letter-spacing: -0.27px;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

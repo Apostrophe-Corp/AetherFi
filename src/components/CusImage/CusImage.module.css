@@ -1,0 +1,14 @@
+.imageParent {
+    position: absolute;
+    right: 0;
+    height: auto;
+    aspect-ratio: 600 / 400 !important;
+}
+
+.image {
+    opacity: 0;
+}
+
+.loaded {
+    opacity: 1;
+}

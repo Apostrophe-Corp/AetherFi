@@ -1,0 +1,84 @@
+.tokenCon {
+	border: none;
+	overflow: hidden;
+	border-radius: 10px;
+	border-color: var(--blue);
+}
+
+.tokenCon.noHandler {
+	border-color: var(--blue);
+	border-radius: 10px;
+}
+
+.tokenCon.noHandler.loader {
+	border-color: transparent;
+}
+
+.tokenCon.noHandler .token {
+	border-radius: 5px;
+}
+
+.tokenCon:not(.tokenCon.noHandler):hover {
+	border-color: #038AF1;
+}
+
+.tokenCon.round {
+	border-radius: 50% !important;
+}
+
+.tokenConFocused {
+	border-color: #038AF1;
+}
+
+.checkMark {
+	padding: 5px;
+	font-weight: 14px;
+	color: #fff;
+	background: #038AF1;
+	border: none;
+	border-radius: 0 0 0 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.token {
+	transition: all 0.3s;
+	object-fit: contain;
+	object-position: center;
+	width: 100% !important;
+	aspect-ratio: 1/1 !important;
+	height: auto !important;
+}
+
+.mediaCon {
+	/* aspect-ratio: 1/1; */
+	height: auto;
+}
+
+.bNone {
+	border: none !important;
+	border-radius: 0 !important;
+	aspect-ratio: 1/1;
+	height: auto;
+}
+
+.token path {
+	fill: var(--blue);
+}
+
+.notLoaded {
+	opacity: 0;
+}
+
+.loaded {
+	opacity: 1;
+}
+
+.tokenCover {
+	width: 100% !important;
+	height: auto !important;
+	aspect-ratio: 1/1 !important;
+	line-height: 0 !important;
+	border-radius: 10px !important;
+}

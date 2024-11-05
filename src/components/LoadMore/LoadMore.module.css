@@ -1,0 +1,79 @@
+.loadMoreCon {
+    margin: 30px 0;
+}
+
+.loadMore {
+    display: inline-flex;
+    height: 45px;
+    padding: 0px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #202125;
+}
+
+.loadMoreTxt {
+    color: #7A7A7A;
+    font-family: var(--font-roboto);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    /* 114.286% */
+    /* 114.286% */
+}
+
+.loadMoreIcon {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+}
+
+.loadMore.loading .loadMoreIcon {
+    animation-name: loading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* Special */
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Ipad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Ipad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {
+    .loadMoreCon {
+        margin: 20px 0;
+    }
+}

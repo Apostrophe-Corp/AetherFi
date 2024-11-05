@@ -1,0 +1,60 @@
+.inputFieldCon {
+    gap: 34px;
+}
+
+.notice {
+    color: #666;
+    font-family: var(--font-inter);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    /* 150% */
+}
+
+.invalid {
+    border-color: #ff0000 !important;
+}
+
+.valid {
+    border-color: #038AF1 !important;
+}
+
+.invalid:active,
+.invalid:focus,
+.invalid:focus-within {
+    border-color: #ff0000 !important;
+    outline: 1px solid #ff0000 !important;
+}
+
+.valid:active,
+.valid:focus,
+.valid:focus-within {
+    border-color: #038AF1 !important;
+    outline: 1px solid #038AF1 !important;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

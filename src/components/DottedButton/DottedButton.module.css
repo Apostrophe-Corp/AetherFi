@@ -1,0 +1,49 @@
+.cName {
+    display: flex;
+    height: 47px;
+    padding: 14.5px 21px !important;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 10px 0px;
+    border: 1px solid #038AF1;
+    background: #038af133;
+    color: #fff;
+    text-align: center;
+}
+
+.cName:disabled {
+    border-color: #038af133;
+}
+
+.rect {
+    width: 8px;
+    height: 8px;
+}
+
+.cName rect {
+    fill: #fff;
+}
+
+.boxSpan {}
+
+.span {
+    color: inherit;
+    font-family: var(--font-roboto);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.xIcon {
+    width: 24px;
+    height: 24px;
+    position: relative !important;
+}
+
+.xShare {
+    border: 1px solid #fff !important;
+    background: #000 !important;
+}

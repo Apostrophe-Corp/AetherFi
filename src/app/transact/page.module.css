@@ -1,0 +1,122 @@
+.page {
+    padding: 60px 0;
+}
+
+.welcome {
+    color: #000;
+    font-family: var(--font-inter);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px;
+    /* 266.667% */
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    gap: 20px;
+}
+
+.navigator {
+    width: 350px;
+    gap: 20px;
+
+}
+
+.viewPort {
+    flex: 1;
+    border-radius: 20px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    padding: 34px;
+}
+
+.navigators {
+    padding: 6px 30px;
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+}
+
+.navBtn {
+    color: #808080;
+    font-family: var(--font-manrope);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    /* 19.2px */
+    background: #fff;
+    border: none;
+    padding: 18px 0;
+}
+
+.navBtn:not(.navBtn:last-of-type) {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.form {
+    width: 330px;
+}
+
+.reg {
+    color: #000;
+    font-family: var(--font-inter);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    /* 133.333% */
+    margin-bottom: 40px;
+}
+
+.subBtn {
+    border-radius: 6px;
+    background: #0D61F8;
+    border: none;
+    margin-top: 20px;
+    padding: 12px 15px;
+    gap: 12px;
+    color: #FFF;
+    font-family: var(--font-manrope);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    /* 16.8px */
+    letter-spacing: 0.14px;
+}
+
+.subIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.navActive {
+    color: #0D61F8 !important;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

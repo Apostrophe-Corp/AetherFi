@@ -1,0 +1,82 @@
+.app {
+	margin: 0 auto;
+	overflow-x: hidden;
+	/* padding-top: 185px; */
+	max-width: 1600px;
+}
+
+.tinyWrapper {
+	position: fixed;
+	height: 50px;
+	width: 50px;
+	border: none;
+	border-radius: 50%;
+	background: var(--blue);
+	bottom: 50px;
+	right: 50px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.tinyMan {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.navBar {
+	z-index: 2;
+}
+
+.children {
+	z-index: 1;
+}
+
+.footer {
+	z-index: 1;
+}
+
+.airdropDetails {
+	z-index: 3;
+}
+
+.notifications {
+	z-index: 4;
+}
+
+.miniNavBar {
+	z-index: 5;
+}
+
+.modal {
+	z-index: 6;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* Special */
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Ipad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Ipad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {
+	.tinyWrapper {
+		bottom: 30px;
+		right: 30px;
+	}
+}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {
+	.tinyWrapper {
+		bottom: 20px;
+		right: 20px;
+	}
+}

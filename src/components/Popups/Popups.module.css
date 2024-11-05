@@ -1,0 +1,546 @@
+.popup {
+	width: min(416px, 90%);
+	flex-shrink: 0;
+	border: none;
+	border-radius: 10px 10px 18px 18px;
+	background: #171717;
+}
+
+.popupOption {
+	padding: 16px 39px 16px;
+	border-top: 1px solid #2a2a2a;
+}
+
+.sQuoteCon {
+	padding: 5px 10px;
+}
+
+.poolDetails {
+	padding: 10px 0;
+}
+
+.popupOptions {
+	padding: 16px 39px 16px;
+}
+
+.popupOptionInfo {
+	gap: 13px;
+}
+
+.purChasePopupOptionInfo {
+	border-top: 1px solid #2a2a2a !important;
+	padding: 10px !important;
+}
+
+.popupOptionIcon {
+	/* position: relative !important; */
+	width: 50px !important;
+	height: 50px !important;
+	border: none;
+	border-radius: 50%;
+}
+
+.popupOptionDetails {
+	/* width: calc(100% - 63px); */
+}
+
+.popupOptionTitle {
+	color: #fff;
+	font-family: var(--font-bungee) !important;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 150%;
+	/* 19.8px */
+}
+
+.popupOptionSubTitle {
+	color: #9c9c9c;
+	font-family: var(--font-roboto);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+	/* 21px */
+}
+
+.popupOptionChevron {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	border: none;
+	border-radius: 50%;
+}
+
+.popupOptionChevron.popupOptionSelected {
+	background: #0D61F8 !important;
+}
+
+.popupTitleBox {
+	padding: 29px 39px 15px;
+	border: 1px solid #0D61F8;
+	border-radius: 8px 8px 0 0;
+	background: linear-gradient(to bottom, #011C30, #011C30),
+		#038af133;
+}
+
+.popupTitle {
+	color: #fff;
+	text-align: center;
+	font-family: var(--font-bungee);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 110%;
+	text-transform: capitalize;
+	/* 22px */
+}
+
+.popupSubTitle {
+	margin-top: 5px;
+	color: #9c9c9c;
+	text-align: center;
+	font-family: var(--font-roboto);
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+	/* 15px */
+}
+
+.popupMessageCon {
+	padding: 20px;
+	min-height: 100px;
+	border: 1px solid #0D61F8;
+	border-top: none;
+	border-bottom: none;
+}
+
+.popupMessage {
+	color: #ffffff;
+	text-align: center;
+	font-family: var(--font-roboto);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+}
+
+.form.popupOptions {
+	padding: 0 !important;
+}
+
+.inputFieldCon {
+	border-top: 1px solid #2a2a2a;
+	padding: 16px 39px 16px;
+}
+
+.popupActionButtonBox {
+	padding: 10px;
+	border: 1px solid #0D61F8;
+	border-radius: 0 0 15px 15px;
+	border-top: none;
+	gap: 10px;
+}
+
+.popupActionButton {
+	border-radius: 0 0 10px 10px !important;
+}
+
+.confirmationBtn.firstType {
+	background: transparent;
+	color: #0D61F8 !important;
+}
+
+.confirmationBtn.firstType rect {
+	fill: #0D61F8 !important
+}
+
+.confirmationBtn.nthType {
+	background: #0D61F8 !important;
+}
+
+.popupActionIconCon {
+	width: 22px;
+	height: 22px;
+	flex-shrink: 0;
+	border: none;
+	border-radius: 50%;
+	background: #ffee0e;
+}
+
+.popupActionIcon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+
+.avatars {
+	padding: 18px 33px 30px;
+	border-top: 1px solid #2a2a2a;
+}
+
+.popupBannerImage {
+	height: auto !important;
+	aspect-ratio: 16 / 9 !important;
+	object-fit: cover !important;
+	border: none;
+	border-radius: 5px;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.popupBannerLoaded {
+	opacity: 1;
+}
+
+.popupActionIconCon.gulag {
+	background: #171717;
+}
+
+.iconPrison {
+	position: relative;
+}
+
+.iconPrison,
+.prisoner {
+	height: 100%;
+	width: 100%;
+	border: none;
+	border-radius: 50%;
+}
+
+.successIcon {
+	color: rgb(18, 244, 10);
+}
+
+.failIcon {
+	color: rgb(255, 0, 0);
+}
+
+.processingIcon1 {
+	color: #0D61F8;
+}
+
+.processingIcon1,
+.processingIcon2 {
+	/* transition: all 1s; */
+	animation-name: rotate;
+	animation-duration: 1.3s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.processingIcon2 {
+	color: #000;
+	transform: rotate(360deg);
+	animation-direction: reverse;
+	position: absolute;
+	top: 0;
+	left: 0;
+	animation-duration: 2.6s;
+}
+
+.queueDiv {
+	width: 80%;
+	height: 80%;
+	border: none;
+	border-radius: 50%;
+	background: #9c9c9c;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(180deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.specialPopup {
+	width: min(834px, 95%) !important;
+}
+
+.sPopupOption {
+	width: 48%;
+	border: 2px solid #2a2a2a;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.isChosen {
+	border-color: #0D61F8;
+}
+
+.sPopupOptionInfo {
+	width: 100%;
+}
+
+.sPopupActionWrapper {
+	padding: 10px 0;
+}
+
+.reward {
+	font-family: var(--font-roboto);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+	/* 21px */
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 0 5px;
+}
+
+.rank1 {
+	color: #000;
+	background: #0D61F8;
+	border-color: #0D61F8;
+}
+
+.rank2 {
+	color: #0D61F8;
+	background: #000;
+	border-color: #0D61F8;
+}
+
+.rank3 {
+	color: #9c9c9c;
+	background: #000;
+	border-color: #9c9c9c;
+}
+
+.popupBannerLoaderCon {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: calc(100% - 20px);
+}
+
+.popupBannerLoaderCon_ {
+	padding: 10px 39px;
+}
+
+.projectsCon {
+	border-top: 1px solid #2a2a2a;
+}
+
+.stakeOption {
+	padding: 10px 5px;
+	background: var(--not-black);
+}
+
+.stakeOption .avatars {
+	border: none !important;
+}
+
+.fixedAvatars {
+	height: 200px;
+	overflow-y: auto;
+	padding: 0;
+}
+
+.tinyClose {
+	background: #0D61F8;
+	color: var(--not-black);
+	font-size: 20px;
+	/* padding: 10px; */
+	height: 35px;
+	width: 35px;
+	border: none;
+	border-radius: 50%;
+	right: -10px;
+	top: -10px;
+	cursor: pointer;
+}
+
+.iframe {
+	width: 415px !important;
+}
+
+.iframe body {
+	width: 100% !important;
+}
+
+/* ---------------Alert-------------- */
+.aPopup {
+	background: #FFF !important;
+	border-radius: 10px !important;
+	width: min(483px, 90%) !important;
+	border: none;
+}
+
+.aPopupTitleBox {
+	background: transparent !important;
+	border: none !important;
+	padding: 40px 40px 23px;
+}
+
+.aPopupTitle {
+	font-family: var(--font-roboto) !important;
+	font-style: normal;
+	font-size: 22px;
+	line-height: 150%;
+	color: #000 !important;
+}
+
+.aCloseBtn {
+	border: none;
+	padding: none;
+	background: #000;
+	border-radius: 50%;
+}
+
+.aCloseIcon {
+	width: 35px;
+	height: 35px;
+}
+
+.aPopupMessageCon {
+	border: none !important;
+	padding: 0 40px 31px !important;
+}
+
+.aPopupMessage {
+	color: #3b3b3b !important;
+	font-style: normal;
+	font-size: 14px;
+	line-height: 150%;
+	font-family: var(--font-roboto) !important;
+	padding: 0 !important;
+}
+
+.aPopupActionButtonBox {
+	padding: 0 40px 40px !important;
+	border: none !important;
+	gap: 17px !important;
+}
+
+/* ---------------Alert-------------- */
+
+/* -------------Prgress Popup---------- */
+.pPopup {
+	padding: 10px !important;
+}
+
+.pPopupTitleBox {
+	border: none !important;
+	margin-bottom: 10px !important;
+	background: #171717 !important;
+	padding: 20px 25px 15px !important;
+}
+
+.progressParent {
+	position: relative !important;
+	padding: 8px !important;
+	border-radius: 5px !important;
+	overflow: hidden !important;
+	margin-bottom: 5px !important;
+	background: #202125 !important;
+}
+
+.loader {
+	position: absolute;
+	z-index: 1 !important;
+	width: 100% !important;
+	height: 100% !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.pPopupOption {
+	z-index: 2 !important;
+	border: none !important;
+	border-radius: 5px !important;
+	padding: 10px 20px;
+	transition: background .3s;
+	position: relative !important;
+	overflow: hidden !important;
+	background: #171717 !important;
+}
+
+.pCompleted {
+	background: #0D61F8 !important;
+}
+
+.pFailed {
+	background: var(--red) !important;
+}
+
+.pPopupActionButtonBox {
+	margin-top: 10px !important;
+	border: none !important;
+	padding: 0 !important;
+}
+
+/* -------------Prgress Popup---------- */
+
+/* -------------Renew Soft Pool Sub----------- */
+.rFormPart {
+	gap: 34px;
+	padding: 10px;
+}
+
+.rQuote {
+	padding-top: 13px;
+	border-top: 2px solid #454545;
+}
+
+/* -------------Renew Soft Pool Sub----------- */
+
+/* -------------Update Video Link------------- */
+.uPlayer {
+	height: auto !important;
+	aspect-ratio: 16/9;
+}
+
+/* -------------Update Video Link------------- */
+
+/* --------------------------- Media Queries ------------------------- */
+/* Special */
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Ipad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Ipad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {
+	.sPopupOption {
+		width: 100%;
+	}
+
+	.iframe {
+		width: 400px !important;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.iframe {
+		width: 360px !important;
+	}
+
+	.confirmationBtn.firstType {
+		order: 2;
+	}
+
+	.confirmationBtn.nthType {
+		order: 1;
+	}
+}

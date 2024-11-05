@@ -1,0 +1,323 @@
+.label {
+	position: relative;
+	max-width: 482px;
+	width: 100%;
+	min-height: 60px;
+	height: 60px;
+	flex-shrink: 0;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background: #151515 !important;
+	background-color: #151515 !important;
+	padding: 12px 23px 12px 28px;
+	outline: none;
+}
+
+.label.ignoreHeight {
+	height: initial !important;
+}
+
+.inputFieldCon {
+	gap: 34px;
+}
+
+.input,
+.label input,
+.label .countryInput {
+	width: 100%;
+	color: #fff;
+	font-family: var(--font-inter);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: #151515 !important;
+	border: none;
+	outline: none;
+}
+
+.input[type='date'] {
+	opacity: 0;
+}
+
+.input[type='date']:focus {
+	opacity: 1;
+}
+
+.label select[class='PhoneInputCountrySelect'] option {
+	width: 100%;
+	color: #fff;
+	font-family: var(--font-inter);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	border: none;
+	outline: none;
+	background-color: transparent !important;
+	height: 60px;
+}
+
+.filled {
+	opacity: 1 !important;
+}
+
+.placeholderSpan {
+	color: rgba(78, 78, 78, 0.8) !important;
+	line-height: 36px;
+	position: absolute;
+	top: 12px;
+	left: 28px;
+	width: initial !important;
+}
+
+.selectControl {
+	padding: 12px 23px 12px 28px;
+	box-shadow: none !important;
+}
+
+.selectControl:focus {
+	box-shadow: none !important;
+	border-color: transparent !important;
+}
+
+.selectOption {
+	width: 200px;
+}
+
+.countryInput {}
+
+.input.password {
+	flex: 1;
+}
+
+.mini {
+	width: 48% !important;
+}
+
+.label:focus-within {
+	background-color: #000 !important;
+}
+
+.label:focus-within .input,
+.label:focus-within input,
+.label:focus-within .countryInput {
+	background-color: #000 !important;
+}
+
+.setVisible {
+	width: 30px;
+	height: 30px;
+	padding: 3px;
+	background: #000;
+	position: absolute;
+	border: none;
+	border-radius: 5px;
+	right: 5px;
+	color: #fff !important;
+}
+
+.innerLabel {
+	color: #808080;
+	font-family: var(--font-manrope);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 120%;
+	/* 16.8px */
+	margin-bottom: 8px;
+}
+
+.input_ {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	/* align-self: stretch; */
+	border: none;
+	border-bottom: 1px solid #0D61F8;
+	background: #FFF;
+	padding: 15px 0;
+	color: #222 !important;
+	font-family: var(--font-manrope);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 120%;
+	/* 14.4px */
+	letter-spacing: 0.48px;
+	resize: none;
+	/* 150% */
+	outline: none !important;
+}
+
+.inputIsPassword {
+	width: calc(100% - 30px) !important;
+}
+
+.select {
+	align-self: stretch;
+	border: none !important;
+	background: #151515 !important;
+	background-color: #151515 !important;
+	color: #fff !important;
+	font-family: var(--font-inter);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px;
+	/* overflow: hidden; */
+	/* 150% */
+}
+
+.selectControl_ {
+	padding: 16px;
+	max-height: 57.6px !important;
+	color: #000 !important;
+	background: var(--blue);
+	box-shadow: none !important;
+	border-radius: 8px !important;
+	border: 1px solid #ccc !important;
+	overflow: hidden;
+}
+
+.valueContainer {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.valueContainer>div {
+	color: #fff !important;
+	/* background: ; */
+	margin: 0 !important;
+}
+
+.requiredMark {
+	color: #e41d1d;
+	font-family: var(--font-inter);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 18px;
+}
+
+.indicatorsContainer>span {
+	display: none;
+}
+
+.indicatorsContainer>div {
+	padding: 0;
+}
+
+.pInnerLabel {
+	color: #666 !important;
+	font-family: var(--font-inter) !important;
+	font-size: 14px !important;
+	font-style: normal !important;
+	font-weight: 600 !important;
+	line-height: 18px !important;
+	/* 128.571% */
+	text-transform: uppercase;
+	margin-bottom: 8px;
+}
+
+.pLabel {
+	min-height: 56px;
+	height: 56px;
+}
+
+.passwordFont {
+	font-family: var(--font-roboto) !important;
+}
+
+.menu {
+	color: #000 !important;
+	background: var(--blue);
+}
+
+.placeholder {
+	color: #666666 !important;
+}
+
+.selectionOptionWrapper {
+	padding: 0;
+	gap: 10px;
+}
+
+.selectionOption {
+	font-family: var(--font-inter) !important;
+	font-size: 14px !important;
+	font-style: normal !important;
+	font-weight: 600 !important;
+	line-height: 18px !important;
+	border: 1px solid var(--blue);
+	/* background: #038af133; */
+	border: 1px solid #0D61F8;
+	;
+	background-color: #fff;
+	color: #0D61F8;
+	/* color: var(--blue); */
+	border-radius: 8px;
+	padding: 10px;
+}
+
+.selected {
+	color: #fff;
+	background: #0D61F8;
+	border-color: #0D61F8;
+}
+
+/* -----------------Media-Queries---------------------- */
+@media only screen and (max-width: 950px) and (min-width: 600px) and (max-height: 440px) {}
+
+@media only screen and (max-width: 900px) and (min-width: 835px) and (min-height: 441px) {}
+
+@media only screen and (max-width: 834px) {
+
+	.input,
+	.countryInput {
+		gap: 11px;
+	}
+
+	.inputFieldCon {
+		gap: 0px;
+	}
+
+	.selectionOption {
+		font-size: 14px !important;
+		font-style: normal !important;
+		font-weight: 600 !important;
+		line-height: 14px !important;
+		border-radius: 7px;
+		padding: 14px;
+	}
+}
+
+@media only screen and (max-width: 834px) and (min-height: 441px) {}
+
+@media only screen and (max-width: 834px) and (min-width: 481px) and (min-height: 441px) {}
+
+@media only screen and (max-width: 480px) {
+	.mini {
+		width: 100% !important;
+	}
+
+	.inputFieldCon {
+		gap: 34px;
+	}
+
+	.selectionOption {
+		font-size: 14px !important;
+		font-style: normal !important;
+		line-height: 14px !important;
+		border-radius: 6px;
+		padding: 12px;
+	}
+}
+
+@media only screen and (max-width: 480px) and (min-width: 361px) {}
+
+@media only screen and (max-width: 360px) {}
+
+@media only screen and (max-width: 360px) and (min-width: 301px) {}
+
+@media only screen and (max-width: 300px) {}

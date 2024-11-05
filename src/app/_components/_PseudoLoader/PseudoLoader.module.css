@@ -1,0 +1,115 @@
+.loadingCon_ {
+	background: #000;
+	gap: 20px;
+	/* position: fixed; */
+	padding: 30px;
+	z-index: 10000;
+	/* left: 0; */
+	width: 100%;
+	height: calc(100vh - 200px);
+	max-width: 1600px;
+	margin: 0 auto;
+}
+
+.loadingContent {
+	width: 120px;
+	gap: 20px;
+}
+
+.loadingContent_ {
+	width: 100%;
+}
+
+.loadingText {
+	color: #fff;
+	font-family: var(--font-luckiest-g);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: 2px;
+}
+
+.indicators {}
+
+.indicatorCon {
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+	border: 1px solid transparent;
+	/* border-radius: 50%; */
+	transition: all .6s;
+}
+
+.indicator {
+	border: none;
+	/* border-radius: 50%; */
+	height: 100%;
+	width: 100%;
+	transition: all .6s;
+	/* background: #ffee0e1a; */
+}
+
+.indicatorCon.active {
+	border-color: var(--blue) !important;
+	transform: scale(1.2, 1.2);
+}
+
+.indicator.active {
+	background: var(--blue) !important;
+}
+
+.loadingCon {
+	height: 311px;
+
+}
+
+.ghettoPLogo {
+	width: 300px !important;
+	height: auto !important;
+	aspect-ratio: auto !important;
+}
+
+.popupActionButton {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {
+	.loadingCon {}
+
+	.indicatorCon {
+		width: 45px;
+		height: 45px;
+	}
+}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {
+	.loadingCon {}
+
+	.indicatorCon {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

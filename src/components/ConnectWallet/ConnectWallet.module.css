@@ -1,0 +1,259 @@
+.connectWallet {
+	width: min(416px, 85%);
+	padding: 40px;
+	gap: 10px;
+	border-radius: 20px;
+	border: 1px solid #E0E0E0;
+	background: #fff;
+}
+
+.walletProvider {}
+
+.walletProviderInfo {
+	gap: 13px;
+	width: calc(100% - 34px);
+}
+
+.walletProviderIcon,
+.walletCon {
+	/* position: relative !important; */
+	width: 27px !important;
+	height: 27px !important;
+	overflow: hidden;
+	border: none;
+	border-radius: 50%;
+	background: #038af133;
+}
+
+.walletIcon {
+	width: 20px;
+	height: 20px;
+}
+
+.walletCon.connected path {
+	fill: #038AF1 !important;
+}
+
+.walletProviderDetails {
+	color: #9c9c9c;
+	width: calc(100% - 40px);
+}
+
+.walletProviderDetails.isConnected {
+	/* color: #fff !important; */
+}
+
+.walletProviderDetailsUser {
+	width: calc(100% - 63px);
+}
+
+.walletProviderConnectedAccount {
+	font-family: var(--font-inter);
+	color: #212121;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	/* 19.8px */
+}
+
+.walletProviderConnectedAccount.notConnected {
+	color: #9c9c9c;
+}
+
+.walletProviderUserAddress {
+	color: #9c9c9c;
+	font-family: var(--font-roboto);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+	/* 21px */
+}
+
+.walletProviderUserAddress.isConnected {
+	color: #fff;
+}
+
+.walletProviderChevron {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	transform: rotate(90deg);
+}
+
+.connectWalletTitleBox {
+	padding: 29px 39px 26px;
+}
+
+.connectWalletTitle {
+	color: #fff;
+	text-align: center;
+	font-family: var(--font-bungee);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 110%;
+	/* 22px */
+}
+
+.connectWalletSubTitle {
+	margin-top: 5px;
+	color: #9c9c9c;
+	text-align: center;
+	font-family: var(--font-roboto);
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%;
+	/* 15px */
+}
+
+.connectWalletProviders {}
+
+.connectWalletDisconnectBox {}
+
+.connectWalletDisconnectButton {
+	border: 1px solid #E41D1D !important;
+	background: #300 !important;
+	color: #E41D1D !important;
+	padding: 14.5px 54px;
+}
+
+.connectWalletDisconnectButton rect {
+	fill: #E41D1D !important;
+}
+
+.connectWalletDisconnectIconCon {
+	width: 22px;
+	height: 22px;
+	flex-shrink: 0;
+	border: none;
+	border-radius: 50%;
+	background: #038AF1;
+}
+
+.connectWalletDisconnectIcon {
+	width: 12px;
+	height: 12px;
+	flex-shrink: 0;
+}
+
+.avatar {
+	object-fit: cover;
+	object-position: center;
+}
+
+.copyBtn,
+.closeBtn {
+	padding: 5px 8px;
+	gap: 13px;
+	background: #fff;
+	color: #616161;
+	font-family: var(--font-inter);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	border: none;
+	border-radius: 10px;
+}
+
+.copyBtn:hover {
+	background: rgba(13, 97, 248, 0.05);
+}
+
+.closeBtn:hover {
+	background: rgba(248, 13, 13, 0.05);
+}
+
+.closeIcon {
+	font-size: 18px;
+}
+
+.form {
+	margin-top: 32px;
+	gap: 20px;
+}
+
+.reg {
+	color: #0A0D14;
+	text-align: center;
+	font-family: var(--font-inter);
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 130%;
+	/* 36.4px */
+	letter-spacing: -0.27px;
+	margin-bottom: 12px;
+}
+
+.subBtn {
+	margin-top: 10px;
+	padding: 13px 17px;
+	border-radius: 12px;
+	border: 1px solid #0D61F8;
+	background: #0D61F8;
+	color: #FFF;
+	text-align: center;
+	font-family: var(--font-inter);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px;
+	/* 150% */
+	letter-spacing: -0.27px;
+}
+
+.wrapOrWrappers {
+	border-radius: 10px;
+	border: 1px solid #E0E0E0;
+	padding: 10px;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {
+	.walletProvider {
+		padding: 14px 30px;
+	}
+
+	.walletProvider_ {
+		padding-left: 39px;
+		padding-right: 39px;
+	}
+
+}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {
+
+	.walletProvider {
+		padding: 10px 20px;
+	}
+
+	.walletProvider_ {
+		padding-left: 39px;
+		padding-right: 39px;
+	}
+
+}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

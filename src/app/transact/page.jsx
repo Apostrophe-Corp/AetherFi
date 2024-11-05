@@ -282,7 +282,7 @@ const Airdrop = () => {
 		const total = Number(fund)
 
 		const totalA = Math.ceil(total / amt)
-		setTotalALGODue(() => trimOverkill(totalA, 6))
+		setTotalALGODue(() => trimOverkill(totalA * 0.001, 6))
 		setTotalASADue(() => trimOverkill(total, 6))
 	}, [requestBody])
 

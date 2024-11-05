@@ -36,7 +36,7 @@ const CustomInput = memo(function ({
 			handler={handler}
 			placeholder={placeholder}
 			type={type}
-			required={i === 0}
+			required={false}
 			label={
 				i === 0 ? `${label}${hasDopple ? ' (Duplicates detected!)' : ''}` : ''
 			}

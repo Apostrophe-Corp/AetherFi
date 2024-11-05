@@ -1,22 +1,12 @@
 {
-  "short_name": "ViewReward",
-  "name": "ViewReward | Very Rewarding",
-  "description": "Get Algorand airdrop tokens and NFTs and gain exposure. Be part of a community that values and rewards its members.",
+  "short_name": "AetherFi",
+  "name": "AetherFi",
+  "description": "Empowering Payments Beyond Borders — No Internet Required.",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "icon_192.png",
       "type": "image/png",
       "sizes": "192x192"
-    },
-    {
-      "src": "icon_512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",

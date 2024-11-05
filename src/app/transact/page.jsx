@@ -33,7 +33,7 @@ const Transfer = () => {
 				path: 'user-data',
 				method: 'post',
 				body: {
-					phoneNumber: phone,
+					phoneNumber: requestBody.phone,
 				},
 			})
 			if (res.success) {
@@ -196,7 +196,7 @@ const Withdraw = () => {
 					state={requestBody}
 					handler={handler}
 					type={'password'}
-					label={'4-digit transaction code'}
+					label={'Transaction code'}
 					placeholder={''}
 					required={true}
 				/>

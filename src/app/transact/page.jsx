@@ -277,7 +277,7 @@ const Airdrop = () => {
 	}
 
 	useEffect(() => {
-		const { amount, fund } = requestBody
+		const { amount = '', fund = '' } = requestBody
 		const amt = Number(amount)
 		const total = Number(fund)
 

@@ -52,7 +52,7 @@ export default function Navbar() {
 					<Action
 						isButton={false}
 						callback={'/transact'}
-						tag={'USDC Trasfer & Withdrawal'}
+						tag={'USDC Transfer & Withdrawal'}
 						cName={cf(n.action)}
 					/>
 					<Action

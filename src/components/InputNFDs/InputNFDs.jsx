@@ -21,7 +21,7 @@ const CustomInput = memo(function ({
 	const [nfdIsValid, setNFDIsValid] = useState(false)
 
 	const validateNFDInput = useCallback(async () => {
-		const isValid = await validateNFD(valueState[i])
+		const isValid = isPossiblePhoneNumber(valueState[i])
 		setNFDIsValid(() => isValid)
 	}, [valueState, i])
 

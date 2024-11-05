@@ -2,7 +2,7 @@
 
 import { Shared as s } from '@/styles'
 import p from './page.module.css'
-import { cf } from '@/utils'
+import { cf, request, trimOverkill } from '@/utils'
 import { Container } from '@/components/Container'
 import { ConnectedWallet } from '@/components/ConnectWallet'
 import { useEffect, useState } from 'react'
@@ -12,11 +12,16 @@ import w from '@/assets/svg/withdraw.svg'
 import t from '@/assets/svg/transfer.svg'
 import Image from 'next/image'
 import { InputNFDs } from '@/components/InputNFDs'
-import { useDebouncedEffect } from '@/hooks'
+import { useDebouncedEffect, useMain } from '@/hooks'
+import { isPossiblePhoneNumber } from 'react-phone-number-input'
+import { useWallet } from '@txnlab/use-wallet'
 
 const Transfer = () => {
+	const { transfer } = useMain()
+	const { activeAccount } = useWallet()
 	const [requestBody, setRequestBody] = useState({})
 	const [recipient, setRecipient] = useState({})
+	const [isDisabled, setIsDisabled] = useState(true)
 
 	useEffect(() => {
 		setRecipient(() => {})
@@ -66,8 +71,26 @@ const Transfer = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// TODO
+		await transfer({
+			totalASADue: Number(requestBody?.amount),
+			res: recipient,
+		})
 		console.log({ requestBody })
 	}
+
+	useEffect(() => {
+		const { phone, amount } = requestBody
+		const phone_ = phone.split(' ').join('')
+		setIsDisabled(
+			() =>
+				!(
+					isPossiblePhoneNumber(phone_) &&
+					recipient?.walletAddress &&
+					Number(amount)
+				)
+		)
+	}, [recipient, requestBody])
+
 	return (
 		<form
 			onSubmit={handleSubmit}
@@ -76,20 +99,13 @@ const Transfer = () => {
 			<span className={cf(s.wMax, s.tLeft, p.reg)}>Transfer</span>
 			<div className={cf(s.wMax, s.flex, s.flexCenter, s.g20, p.inputs)}>
 				<InputField
-					tag={'username'}
-					state={requestBody}
-					handler={handler}
-					type={'text'}
-					label={'Username'}
-					placeholder={''}
-					required={true}
-				/>
-				<InputField
 					tag={'phone'}
 					state={requestBody}
 					handler={handler}
 					type={'tel'}
-					label={'Phone number'}
+					label={`Phone number${
+						recipient?.username ? ` (${recipient?.username})` : ''
+					}`}
 					placeholder={''}
 					required={true}
 				/>
@@ -106,6 +122,7 @@ const Transfer = () => {
 			<button
 				type={'submit'}
 				className={cf(s.wMax, s.flex, s.spaceXBetween, p.subBtn)}
+				disabled={!(!isDisabled && activeAccount?.address)}
 			>
 				<span className={cf(s.dInlineBlock)}>Transfer</span>
 				<Image
@@ -120,15 +137,14 @@ const Transfer = () => {
 
 const Withdraw = () => {
 	const [requestBody, setRequestBody] = useState({})
+	const { showLoading, showAlert } = useMain()
 
 	const handler = (e) => {
 		const name = e.target.name
 		const value = e.target.value
 
 		const validators = {
-			recipient: true,
-			pin: true,
-			amount: true,
+			withdrawalCode: true,
 		}
 
 		switch (name) {
@@ -148,7 +164,25 @@ const Withdraw = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// TODO
-		console.log({ requestBody })
+		showLoading()
+		const res = await request({
+			path: 'withdrawals',
+			method: 'post',
+			body: {
+				withdrawalCode: requestBody['withdrawalCode'],
+			},
+		})
+		if (res.success) {
+			showAlert({
+				title: 'Success',
+				message: 'Withdrawal successful',
+			})
+		} else {
+			showAlert({
+				title: 'Failed',
+				message: 'Withdrawal unsuccessful',
+			})
+		}
 	}
 	return (
 		<form
@@ -158,16 +192,7 @@ const Withdraw = () => {
 			<span className={cf(s.wMax, s.tLeft, p.reg)}>Withdraw</span>
 			<div className={cf(s.wMax, s.flex, s.flexCenter, s.g20, p.inputs)}>
 				<InputField
-					tag={'recipient'}
-					state={requestBody}
-					handler={handler}
-					type={'text'}
-					label={"Recipient's phone number"}
-					placeholder={''}
-					required={true}
-				/>
-				<InputField
-					tag={'pin'}
+					tag={'withdrawalCode'}
 					state={requestBody}
 					handler={handler}
 					type={'password'}
@@ -175,19 +200,11 @@ const Withdraw = () => {
 					placeholder={''}
 					required={true}
 				/>
-				<InputField
-					tag={'amount'}
-					state={requestBody}
-					handler={handler}
-					type={'number'}
-					label={'Amount'}
-					placeholder={''}
-					required={true}
-				/>
 			</div>
 			<button
 				type={'submit'}
 				className={cf(s.wMax, s.flex, s.spaceXBetween, p.subBtn)}
+				disabled={!requestBody['withdrawalCode']}
 			>
 				<span className={cf(s.dInlineBlock)}>Withdraw</span>
 				<Image
@@ -201,11 +218,15 @@ const Withdraw = () => {
 }
 
 const Airdrop = () => {
+	const { showAlert, showLoading, createAirdrop } = useMain()
+	const { activeAccount } = useWallet()
 	const [requestBody, setRequestBody] = useState({
 		period: { value: 'weekly', label: 'Weekly' },
 		beneficiaries: [],
 	})
 	const [isDisabled, setIsDisabled] = useState(true)
+	const [totalASADue, setTotalASADue] = useState(0)
+	const [totalALGODue, setTotalALGODue] = useState(0)
 
 	const [claimDurationOptions] = useState([
 		{ value: 'daily', label: 'Daily' },
@@ -244,8 +265,31 @@ const Airdrop = () => {
 		const newBeneficiaries = beneficiaries.map((string) =>
 			string.split(' ').join('')
 		)
+
+		await createAirdrop({
+			beneficiaries: newBeneficiaries,
+			req,
+			totalALGODue,
+			totalASADue,
+		})
+
 		console.log({ requestBody, req, newBeneficiaries })
 	}
+
+	useEffect(() => {
+		const { amount, fund } = requestBody
+		const amt = Number(amount)
+		const total = Number(fund)
+
+		const totalA = Math.ceil(total / amt)
+		setTotalALGODue(() => trimOverkill(totalA, 6))
+		setTotalASADue(() => trimOverkill(total, 6))
+	}, [requestBody])
+
+	useEffect(() => {
+		const { org } = requestBody
+		setIsDisabled(() => !(org && totalALGODue && totalASADue))
+	}, [requestBody, totalALGODue, totalASADue])
 
 	return (
 		<form
@@ -303,6 +347,9 @@ const Airdrop = () => {
 					required={true}
 				/>
 			</div>
+			<span className={cf(s.wMax, s.dInlineBlock, p.quote)}>
+				Amount Due: {totalASADue} USDC {'&'} {totalALGODue} ALGO
+			</span>
 			<button
 				type={'submit'}
 				className={cf(s.wMax, s.flex, s.spaceXBetween, p.subBtn)}
@@ -332,14 +379,32 @@ const Navigator = ({ tag, setView, currentView, view }) => {
 	)
 }
 
+const Airdrop_ = ({ x }) => {
+	return (
+		<div className={cf(s.wMax, s.flex, s.flexCenter, p.airdrop_)}>
+			<span className={cf(s.wMax, s.dInlineBlock, p.airSpan)}>
+				<span className={cf(p.title)}>Airdrop by</span>
+				{x?.organizationName}
+			</span>
+			<span className={cf(s.wMax, s.dInlineBlock, p.airSpan)}>
+				{x?.amount} USDC to{' '}
+				{x?.beneficiaries?.length ? x?.beneficiaries?.length : 'all '}users{' '}
+				{x?.period}.
+			</span>
+		</div>
+	)
+}
+
 export default function Page() {
 	const [view, setView] = useState('transfer')
+	const { vendorInfo, airdrops } = useMain()
 
 	return (
 		<Container>
 			<div className={cf(s.wMax, s.flex, s.flexTop, p.page)}>
 				<span className={cf(s.wMax, s.dInlineBlock, s.tLeft, p.welcome)}>
-					Welcome back
+					Welcome back{' '}
+					{vendorInfo?._id ? `(Vendor ID: ${vendorInfo?._id})` : ''}
 				</span>
 				<div className={cf(s.wMax, s.flex, s.flexTop, p.wrapper)}>
 					<div className={cf(s.flex, s.flexLeft, s.flex_dColumn, p.navigator)}>
@@ -365,7 +430,7 @@ export default function Page() {
 							/>
 						</div>
 					</div>
-					<div className={cf(s.flex, s.flexLeft, p.viewPort)}>
+					<div className={cf(s.flex, s.spaceXBetween, p.viewPort)}>
 						{view === 'transfer' ? (
 							<Transfer />
 						) : view === 'withdraw' ? (
@@ -375,6 +440,18 @@ export default function Page() {
 						) : (
 							<></>
 						)}
+						<div className={cf(s.flex, s.flexTop, p.airdrops)}>
+							{airdrops?.length ? (
+								airdrops.map((el) => (
+									<Airdrop_
+										x={el}
+										key={el?._id}
+									/>
+								))
+							) : (
+								<></>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>

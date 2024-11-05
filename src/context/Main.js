@@ -3,13 +3,13 @@
 import { ADMIN_ADDRESS, NETWORK, USDC } from '@/constants'
 import { useAuth, useDebouncedEffect } from '@/hooks'
 import {
-	customTrim,
 	deBounce,
 	getASAInfo,
 	getAssetsByAccount,
 	msToTime,
 	request,
 	splitTransactions,
+	trimOverkill,
 } from '@/utils'
 import { useWallet } from '@txnlab/use-wallet'
 import algosdk from 'algosdk'
@@ -146,6 +146,8 @@ const MainContextProvider = ({ children }) => {
 	const [tempAddress, setTempAddress] = useState('')
 	const [showMiniNav, setShowMiniNav] = useState(false)
 	const [userNFD, setUserNFD] = useState('')
+	const [vendors, setVendors] = useState([])
+	const [vendorInfo, setVendorInfo] = useState({})
 
 	const sleep = async (ms) =>
 		await new Promise((resolve) => setTimeout(resolve, ms))
@@ -299,13 +301,13 @@ const MainContextProvider = ({ children }) => {
 					title: 'Asset Opt-in',
 					message: `You're not opted-in to the asset: ${
 						asaInfo?.name
-					} (#${assetID}), and we cannot send you the asset opt-in transaction, as your ALGO balance: ${customTrim(
+					} (#${assetID}), and we cannot send you the asset opt-in transaction, as your ALGO balance: ${trimOverkill(
 						algoBal,
 						3
-					)}, minimum balance: ${customTrim(
+					)}, minimum balance: ${trimOverkill(
 						minimumBal,
 						3
-					)}, is insufficient to complete this process. Required amount: ${customTrim(
+					)}, is insufficient to complete this process. Required amount: ${trimOverkill(
 						minimumBal + 1 + 0.001,
 						3
 					)}`,
@@ -484,13 +486,13 @@ const MainContextProvider = ({ children }) => {
 				title: 'Asset Opt-in',
 				message: `You're not opted-in to ${yetToOptIn?.length} assets${
 					yetToOptIn?.length > 1 ? 's' : ''
-				}, and we cannot send you the asset opt-in transaction, as your ALGO balance: ${customTrim(
+				}, and we cannot send you the asset opt-in transaction, as your ALGO balance: ${trimOverkill(
 					algoBal,
 					3
-				)}, minimum balance: ${customTrim(
+				)}, minimum balance: ${trimOverkill(
 					minimumBal,
 					3
-				)}, is insufficient to complete this process. Required amount: ${customTrim(
+				)}, is insufficient to complete this process. Required amount: ${trimOverkill(
 					minimumBal + 1.001 + yetToOptIn?.length * 0.101,
 					3
 				)}`,
@@ -651,13 +653,13 @@ const MainContextProvider = ({ children }) => {
 				title: 'Asset Opt-in',
 				message: `You're unable to opt-out of all ${yetToOptIn?.length} assets${
 					yetToOptIn?.length > 1 ? 's' : ''
-				}, as your ALGO balance: ${customTrim(
+				}, as your ALGO balance: ${trimOverkill(
 					algoBal,
 					3
-				)}, minimum balance: ${customTrim(
+				)}, minimum balance: ${trimOverkill(
 					minimumBal,
 					3
-				)}, is insufficient to complete this process. Required amount: ${customTrim(
+				)}, is insufficient to complete this process. Required amount: ${trimOverkill(
 					minimumBal + yetToOptOut?.length * 0.101,
 					3
 				)}`,
@@ -866,9 +868,7 @@ const MainContextProvider = ({ children }) => {
 
 	const getAirdrops = async (status = 'active') => {
 		const res = await request({
-			path: `all-airdrops?status=${status}&limit=${
-				airdropSize ? airdropSize : 5
-			}`,
+			path: `airdrops`,
 		})
 
 		if (res.success) {
@@ -932,8 +932,24 @@ const MainContextProvider = ({ children }) => {
 		return res.success && res.data.airdrops.length ? res.data.airdrops : []
 	}
 
+	const getVendors = async () => {
+		const res = await request({
+			path: 'vendors',
+		})
+
+		if (res.success && res.data?.vendors) {
+			const addrs = res.data.vendors.map((el) => el?.walletAddress)
+			setVendors(() => addrs)
+			const vInfo = (res.data?.vendors ?? []).find(
+				(el) => el?.walletAddress === activeAccount?.address
+			)
+			if (vInfo) setVendorInfo(() => vInfo)
+		}
+	}
+
 	const retrievePlatformData = async () => {
 		getAirdrops('active')
+		getVendors()
 		if (user?.userID && user?.accessToken) {
 			getUserAirdrops()
 		}
@@ -943,12 +959,12 @@ const MainContextProvider = ({ children }) => {
 
 	const hardRetrieval = async () => {
 		showLoading()
-		let baseRequests = [await getAirdrops('active')]
+		let baseRequests = [await getVendors(), await getAirdrops('active')]
 		if (user?.userID && user?.accessToken) {
-			baseRequests = baseRequests.concat([await getUserAirdrops()])
+			// baseRequests = baseRequests.concat([await getUserAirdrops()])
 		}
 		if (roleIsAdmin) {
-			baseRequests = baseRequests.concat([])
+			// baseRequests = baseRequests.concat([])
 		}
 		await Promise.all(baseRequests)
 			.then(() => true)
@@ -957,81 +973,267 @@ const MainContextProvider = ({ children }) => {
 	}
 
 	const transfer = async ({ totalASADue, res }) => {
+		showLoading()
 		let asaInfo = {}
 		if (res.success && res.data?.walletAddress) {
 			asaInfo = await getASAInfo(USDC)
 			const asaBal = (await getBalance(USDC)) / 10 ** asaInfo?.decimals
 			if (asaBal < totalASADue) {
-				setStage3((x) => ({
-					...x,
-					processing: false,
-					description: `Insufficient ${asaInfo.unit} balance: ${customTrim(
+				showAlert({
+					title: 'Insufficient Balance',
+					message: `Insufficient ${asaInfo.unit} balance: ${trimOverkill(
 						asaBal,
-						3
-					)}. Required balance: ${customTrim(totalASADue, 3)}`,
-					complete: true,
-				}))
+						2
+					)}. Required balance: ${trimOverkill(totalASADue, 2)}`,
+				})
 				setCanCloseModal(() => true)
 				return {
 					success: false,
-					message: `Insufficient ${asaInfo.unit} balance: ${customTrim(
+					message: `Insufficient ${asaInfo.unit} balance: ${trimOverkill(
 						asaBal,
-						3
-					)}. Required balance: ${customTrim(totalASADue, 3)}`,
+						2
+					)}. Required balance: ${trimOverkill(totalASADue, 2)}`,
+				}
+			}
+
+			const waitRoundsToConfirm = 8
+			const suggestedParams = await algodClient.getTransactionParams().do()
+			try {
+				let txID = ''
+				const user_aXferTxn =
+					algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+						amount: Number(
+							trimOverkill(
+								trimOverkill(totalASADue, 6) * 10 ** asaInfo.decimals,
+								0
+							)
+						),
+						assetIndex: Number(USDC ?? 0),
+						from: activeAccount?.address,
+						note: new Uint8Array(
+							Buffer.from(
+								`Transfer of ${trimOverkill(
+									totalASADue,
+									asaInfo?.decimals ?? 0
+								)} ${asaInfo?.unit} to ${
+									res?.username
+								} | #${Date.now()}-${Math.random()}.`
+							)
+						),
+						to: res?.walletAddress,
+						suggestedParams,
+					})
+
+				const encUser_aXferTxn =
+					algosdk.encodeUnsignedTransaction(user_aXferTxn)
+				const signedTxn = await signTransactions([encUser_aXferTxn])
+				const { id } = await sendTransactions(signedTxn, waitRoundsToConfirm)
+				txID = id
+
+				showAlert({
+					title: 'Complete',
+					message: `Your transfer of ${trimOverkill(
+						totalASADue,
+						2
+					)} USDC is complete.`,
+				})
+				return txID
+			} catch (err) {
+				const errorMessage = getErrorMessage(err)
+				// console.log({ err })
+				showAlert({
+					title: 'Failed',
+					message: `Your transfer of ${trimOverkill(
+						totalASADue,
+						2
+					)} USDC was unsuccessful.`,
+				})
+				setCanCloseModal(() => true)
+				return {
+					success: false,
+					message: `Transfer unsuccessful`,
 				}
 			}
 		}
 	}
 
-	const login = async (newLogin = true, lastResort = false) => {
-		if (!activeAccount?.address) return
-		if (userAddress === activeAccount?.address) return
-		if (activeAccount?.address !== ADMIN_ADDRESS) {
-			const loginRes = await request({
-				path: 'login',
-				method: 'post',
-				body: {
-					address: activeAccount?.address,
-				},
-			})
-			if (
-				loginRes.success &&
-				loginRes?.data?.user &&
-				loginRes?.data?.accessToken
-			) {
-				setUser((x) => ({
-					...x,
-					role: loginRes?.data?.user?.role,
-					userID: loginRes?.data?.user?._id,
-					accessToken: loginRes?.data?.accessToken,
-					metricsID: loginRes?.data?.user?.metrics,
-					isBlacklisted: loginRes?.data?.user?.isBlacklisted,
-				}))
-				setRoleIsAdmin(() => false)
-				setUserAddress(() => loginRes?.data?.user?.address)
-				return loginRes?.data?.accessToken
-			} else {
-				setUserAddress(() => '')
-				setUser(() => ({}))
-				setRoleIsAdmin(() => false)
-			}
-			return false
-		}
-		return false
-	}
+	const createAirdrop = async ({
+		beneficiaries,
+		req,
+		totalALGODue,
+		totalASADue,
+	}) => {
+		showLoading()
+		const res = await request({
+			path: 'airdrops',
+			method: 'post',
+			body: {
+				organizationName: req.org,
+				amount: trimOverkill(Number(req.amount), 6),
+				beneficiaries: beneficiaries,
+				creatorAddress: activeAccount?.address,
+				period: req.period,
+			},
+		})
 
-	const logout = (showAlert_ = true) => {
-		if (showAlert_)
-			showAlert({
-				title: 'Alert',
-				message: 'Login aborted!',
-			})
-		setTempAddress(() => '')
-		setUser(() => ({}))
-		setUserAddress(() => '')
-		setRoleIsAdmin(() => false)
-		setUserAirdrops(() => [])
-		setNoMoreUAirdrops(() => true)
+		if (res.success && res.data?.walletAddress) {
+			const algoDec = 10 ** 6
+			const waitRoundsToConfirm = 8
+			const suggestedParams = await algodClient.getTransactionParams().do()
+			const algoBal = (await getBalance(0)) / 10 ** 6
+			const minimumBal = (await getMinimumBal(activeAccount?.address)) / 10 ** 6
+			let asaInfo = {}
+			let asaBal = 0
+
+			if (algoBal < totalALGODue + minimumBal + 0.001) {
+				showAlert({
+					title: 'Insufficient balance',
+					message: `Insufficient ALGO balance: ${trimOverkill(
+						algoBal,
+						2
+					)}. Required balance: ${trimOverkill(
+						totalALGODue + minimumBal + 0.001,
+						2
+					)}`,
+				})
+				return {
+					success: false,
+					message: `Insufficient ALGO balance: ${trimOverkill(
+						algoBal,
+						2
+					)}. Required balance: ${trimOverkill(
+						totalALGODue + minimumBal + 0.001,
+						2
+					)}`,
+				}
+			}
+
+			asaInfo = await getASAInfo(USDC)
+			asaBal = (await getBalance(USDC)) / 10 ** asaInfo?.decimals
+			if (asaBal < totalASADue) {
+				showAlert({
+					title: 'Insufficient balance',
+					message: `Insufficient ${asaInfo.unit} balance: ${trimOverkill(
+						asaBal,
+						2
+					)}. Required balance: ${trimOverkill(totalASADue, 2)}`,
+				})
+				return {
+					success: false,
+					message: `Insufficient ${asaInfo.unit} balance: ${trimOverkill(
+						asaBal,
+						2
+					)}. Required balance: ${trimOverkill(totalASADue, 2)}`,
+				}
+			}
+
+			try {
+				let txID = ''
+				const txnsWrapper = []
+				const initGroupTxns = []
+				const user_PayTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject(
+					{
+						from: activeAccount?.address,
+						amount: Number(
+							trimOverkill(trimOverkill(totalALGODue, 6) * algoDec, 0)
+						),
+						note: new Uint8Array(
+							Buffer.from(
+								`Payment of ${trimOverkill(
+									totalALGODue,
+									6
+								)} ALGO for airdrop distribution transactional costs on to AetherFi | #${Date.now()}-${Math.random()}.`
+							)
+						),
+						to: res.data?.walletAddress,
+						suggestedParams,
+					}
+				)
+				initGroupTxns.push(user_PayTxn)
+				const user_aXferTxn =
+					Number(USDC) === 0
+						? algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+								from: activeAccount?.address,
+								amount: Math.round(
+									trimOverkill(totalASADue, 6) * 10 ** asaInfo.decimals
+								),
+								note: new Uint8Array(
+									Buffer.from(
+										`Payment of ${trimOverkill(
+											totalASADue,
+											asaInfo?.decimals ?? 0
+										)} ${
+											asaInfo?.unit
+										} for airdrop distribution to AetherFi | #${Date.now()}-${Math.random()}.`
+									)
+								),
+								to: res.data?.walletAddress,
+								suggestedParams,
+						  })
+						: algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+								amount: Number(
+									trimOverkill(
+										trimOverkill(totalASADue, 6) * 10 ** asaInfo.decimals,
+										0
+									)
+								),
+								assetIndex: Number(USDC ?? 0),
+								from: activeAccount?.address,
+								note: new Uint8Array(
+									Buffer.from(
+										`Transfer of ${trimOverkill(
+											totalASADue,
+											asaInfo?.decimals ?? 0
+										)} ${
+											asaInfo?.unit
+										} for airdrop distribution to AetherFi | #${Date.now()}-${Math.random()}.`
+									)
+								),
+								to: res.data?.walletAddress,
+								suggestedParams,
+						  })
+				initGroupTxns.push(user_aXferTxn)
+				const txnGroup1 = algosdk.assignGroupID(
+					initGroupTxns,
+					activeAccount?.address
+				)
+				const encodedPayTxn = algosdk.encodeUnsignedTransaction(txnGroup1[0])
+				const encUser_aXferTxn = algosdk.encodeUnsignedTransaction(txnGroup1[1])
+				txnsWrapper.push(encodedPayTxn)
+				txnsWrapper.push(encUser_aXferTxn)
+				const signedTxn = await signTransactions([...txnsWrapper])
+				const { id } = await sendTransactions(signedTxn, waitRoundsToConfirm)
+				txID = id
+				const res = await makeRequest({
+					path: `airdrop/${res.data?.airdropID}`,
+					method: 'patch',
+					body: {},
+				})
+				retrievePlatformData()
+				if (res.success) {
+					showAlert({
+						title: 'Success',
+						message: `Airdrop successfully created`,
+					})
+					return res
+				}
+			} catch (err) {
+				const errorMessage = getErrorMessage(err)
+				// setCanCloseModal((x) => true)
+				showAlert({
+					title: 'Failed',
+					message: `Unable to create airdrop`,
+				})
+				return {
+					success: false,
+					message: `Project top-up unsuccessful`,
+				}
+			}
+		}
+		showAlert({
+			title: 'Failed',
+			message: `Unable to create airdrop`,
+		})
 	}
 
 	const ContextValue = {
@@ -1115,11 +1317,16 @@ const MainContextProvider = ({ children }) => {
 		getMoreUAirdrops,
 		retrievePlatformData,
 		hardRetrieval,
-		login,
-		logout,
 		userNFD,
 		setUserNFD,
 		copyToClipboard,
+		transfer,
+		vendors,
+		setVendors,
+		getVendors,
+		vendorInfo,
+		setVendorInfo,
+		createAirdrop,
 	}
 
 	useEffect(() => {
@@ -1181,61 +1388,6 @@ const MainContextProvider = ({ children }) => {
 			timer = undefined
 		}
 	}, [])
-
-	useDebouncedEffect(
-		async (deps) => {
-			const [
-				activeAccount,
-				isReady,
-				isActive,
-				requestingLogin,
-				loginRequest,
-				providers,
-				tempAddress,
-			] = deps
-			const currentProvider = providers
-				? providers.find((x) => activeAccount?.providerId === x.metadata.id) ??
-				  {}
-				: {}
-			const providerIsConnectedAndActive =
-				currentProvider?.isActive && currentProvider?.isConnected
-			if (
-				activeAccount &&
-				activeAccount?.address &&
-				isReady &&
-				isActive &&
-				providerIsConnectedAndActive
-			) {
-				if (
-					// (activeAccount?.address === ADMIN_ADDRESS && !showModal) ||
-					// activeAccount?.address !== ADMIN_ADDRESS
-					tempAddress !== activeAccount?.address
-				) {
-					// const currentModal = modal
-					// const wasShowingModal = showModal
-					const res = await login(roleIsAdmin === '', requestingLogin)
-					if (res && requestingLogin && loginRequest.resolve) {
-						loginRequest.resolve(res)
-					} else if (requestingLogin && loginRequest.reject)
-						loginRequest.reject()
-					else if (!res) logout(false)
-					// setModal((x) => currentModal)
-					// if (wasShowingModal) setShowModal((x) => true)
-					setTempAddress(() => activeAccount?.address)
-				}
-			}
-		},
-		[
-			activeAccount,
-			isReady,
-			isActive,
-			requestingLogin,
-			loginRequest,
-			providers,
-			tempAddress,
-		],
-		3000
-	)
 
 	const alertForLutePerms = useCallback(
 		deBounce(() => {

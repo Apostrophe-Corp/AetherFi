@@ -4,15 +4,15 @@ import { useMain } from '@/hooks'
 import { Shared as s } from '@/styles'
 import { useWallet } from '@txnlab/use-wallet'
 import Image from 'next/image'
-import { useState } from 'react'
-import { cf } from '../../utils'
+import { useEffect, useState } from 'react'
+import { cf, request } from '../../utils'
 import { CusImage } from '../CusImage'
 import { DottedButton } from '../DottedButton'
 import c from './ConnectWallet.module.css'
 import UserAddress from './UserAddress'
 import { IoMdClose } from 'react-icons/io'
 import { BsCopy } from 'react-icons/bs'
-import { InputField } from '../InputField'
+import { getActualInputValues, InputField } from '../InputField'
 
 const WalletProvider = ({ activeAccount, provider, address }) => {
 	const { userNFD, setUserNFD } = useMain()
@@ -221,9 +221,18 @@ const WalletProvider = ({ activeAccount, provider, address }) => {
 
 const ConnectWallet = ({ showRegister = true }) => {
 	const { activeAccount, providers } = useWallet()
-	const { setUserNFD, isTiny, logout, copyToClipboard } = useMain()
+	const {
+		setUserNFD,
+		isTiny,
+		logout,
+		copyToClipboard,
+		vendors,
+		showAlert,
+		retrievePlatformData,
+		showLoading,
+	} = useMain()
 	const [showAccounts, setShowAccounts] = useState(false)
-	const [userIsUnregistered, setUserIsUnregistered] = useState(true)
+	const [userIsUnregistered, setUserIsUnregistered] = useState(false)
 	const [requestBody, setRequestBody] = useState({})
 
 	const handler = (e) => {
@@ -252,8 +261,37 @@ const ConnectWallet = ({ showRegister = true }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		showLoading()
 		// TODO
+		const { phone, ...req } = getActualInputValues(requestBody)
+		const phone_ = phone.split(' ').join('')
+		const res = await request({
+			path: 'vendors',
+			method: 'post',
+			body: {
+				phoneNumber: phone_,
+				walletAddress: activeAccount?.address,
+				...req,
+			},
+		})
+		retrievePlatformData()
+		if (res.success) {
+			showAlert({
+				title: 'Success',
+				message: `You've been registered as a Vendor`,
+			})
+		} else {
+			showAlert({
+				title: 'Failed',
+				message: `Unable to complete registration`,
+			})
+		}
 	}
+
+	useEffect(() => {
+		const userExists = vendors.some((el) => el === activeAccount?.address)
+		setUserIsUnregistered(() => !userExists)
+	}, [activeAccount, vendors])
 
 	return (
 		<div className={cf(s.flex, s.flexCenter, c.connectWallet)}>
@@ -266,7 +304,9 @@ const ConnectWallet = ({ showRegister = true }) => {
 					onSubmit={handleSubmit}
 					className={cf(s.flex, s.flexTop, c.form)}
 				>
-					<span className={cf(s.wMax, s.tCenter, c.reg)}>Register</span>
+					<span className={cf(s.wMax, s.tCenter, c.reg)}>
+						Register as a Vendor
+					</span>
 					<InputField
 						tag={'username'}
 						state={requestBody}
@@ -310,7 +350,7 @@ const ConnectWallet = ({ showRegister = true }) => {
 
 export function ConnectedWallet() {
 	const { activeAccount, providers } = useWallet()
-	const { setUserNFD, isTiny, logout, copyToClipboard } = useMain()
+	const { setUserNFD, isTiny, copyToClipboard } = useMain()
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, s.g10, c.wrapOrWrappers)}>
 			<div
@@ -359,7 +399,6 @@ export function ConnectedWallet() {
 									className={cf(s.flex, s.flexCenter, s.g10, c.closeBtn)}
 									onClick={async () => {
 										setUserNFD((x) => null)
-										logout(false)
 										provider.disconnect()
 									}}
 								>

@@ -47,7 +47,8 @@ const WalletProvider = ({ activeAccount, provider, address }) => {
 					s.spaceXBetween,
 					s.spaceYCenter,
 					s.p_relative,
-					c.walletProviderInfo
+					c.walletProviderInfo,
+					s.flexOne
 				)}
 			>
 				{!provider.isConnected ? (

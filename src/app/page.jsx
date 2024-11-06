@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 
 const Home = () => {
-	const { isSmall, isTiny } = useMain()
+	const { isSmall, isTiny, showConnectWallet } = useMain()
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexTop, p.page)}>
 			{/* Top Section */}

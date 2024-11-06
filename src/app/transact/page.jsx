@@ -36,8 +36,9 @@ const Transfer = () => {
 					phoneNumber: requestBody.phone,
 				},
 			})
+			console.log({ res })
 			if (res.success) {
-				setRecipient(() => res?.data)
+				setRecipient(() => res?.data?.recipient)
 			}
 		},
 		[requestBody.phone],

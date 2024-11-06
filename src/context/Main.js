@@ -1217,7 +1217,7 @@ const MainContextProvider = ({ children }) => {
 				const { id } = await sendTransactions(signedTxn, waitRoundsToConfirm)
 				txID = id
 				const res1 = await makeRequest({
-					path: `airdrop/${res1.data?.airdropID}`,
+					path: `airdrop/${res.data?.airdropID}`,
 					method: 'patch',
 					body: {},
 				})

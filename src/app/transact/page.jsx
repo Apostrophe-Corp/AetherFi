@@ -33,7 +33,7 @@ const Transfer = () => {
 				path: 'user-data',
 				method: 'post',
 				body: {
-					phoneNumber: requestBody.phone,
+					phoneNumber: (requestBody.phone ?? '').split(' ').join(''),
 				},
 			})
 			console.log({ res })

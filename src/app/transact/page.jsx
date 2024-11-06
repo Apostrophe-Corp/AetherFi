@@ -385,12 +385,11 @@ const Airdrop_ = ({ x }) => {
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, p.airdrop_)}>
 			<span className={cf(s.wMax, s.dInlineBlock, p.airSpan)}>
-				<span className={cf(p.title)}>Airdrop by</span>
-				{x?.organizationName}
+				<span className={cf(p.title)}>Airdrop by</span> {x?.organizationName}
 			</span>
 			<span className={cf(s.wMax, s.dInlineBlock, p.airSpan)}>
 				{x?.amount} USDC to{' '}
-				{x?.beneficiaries?.length ? x?.beneficiaries?.length : 'all '}users{' '}
+				{x?.beneficiaries?.length ? x?.beneficiaries?.length : 'all'} users{' '}
 				{x?.period}.
 			</span>
 		</div>
@@ -432,7 +431,9 @@ export default function Page() {
 							/>
 						</div>
 					</div>
-					<div className={cf(s.flex, s.spaceXBetween, p.viewPort)}>
+					<div
+						className={cf(s.flex, s.spaceXBetween, s.spaceYStart, p.viewPort)}
+					>
 						{view === 'transfer' ? (
 							<Transfer />
 						) : view === 'withdraw' ? (

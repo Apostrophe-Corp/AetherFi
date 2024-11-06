@@ -1,6 +1,6 @@
 'use client'
 
-import { cf, truncate } from '@/utils'
+import { cf, getNFD, truncate } from '@/utils'
 import { Container } from '../Container'
 import { Shared as s } from '@/styles'
 import n from './Navbar.module.css'
@@ -10,6 +10,7 @@ import branding from '@/assets/img/aether.png'
 import { useMain } from '@/hooks'
 import GetStarted from '../GetStartedBlue/GetStarted'
 import { useWallet } from '@txnlab/use-wallet'
+import { useEffect, useState } from 'react'
 
 const Action = ({ isButton, callback, tag, cName }) => {
 	const Wrapper = () =>
@@ -33,8 +34,31 @@ const Action = ({ isButton, callback, tag, cName }) => {
 }
 
 export default function Navbar() {
-	const { showConnectWallet, userNFD, showAlert } = useMain()
+	const { showConnectWallet, userNFD, showAlert, setUserNFD } = useMain()
 	const { activeAccount } = useWallet()
+	const [connectedAccount, setConnectedAccount] = useState(null)
+
+	useEffect(() => {
+		const setUpNFD = async (address) => {
+			const add = address
+			const res = await getNFD(add)
+			if (res.success && res?.[add]?.name) {
+				setUserNFD(() => res?.[add]?.name)
+				if (res?.[add]?.properties?.userDefined?.avatar) return res?.[add]?.name
+			} else {
+				setUserNFD(() => truncate(add, 6))
+				return truncate(add, 6)
+			}
+		}
+
+		const doSomething = async () => {
+			const nfd = await setUpNFD(activeAccount?.address ?? '')
+			setConnectedAccount(() => nfd)
+		}
+		doSomething()
+		// checkANSForNames(address)
+	}, [activeAccount])
+
 	return (
 		<Container>
 			<div className={cf(s.wMax, s.flex, s.spaceXBetween, n.parent)}>
@@ -79,7 +103,7 @@ export default function Navbar() {
 						className={cf(s.flex, s.flexCenter, n.connectWallet)}
 						onClick={() => showConnectWallet()}
 					>
-						{activeAccount?.address ? userNFD : 'Connect Wallet'}
+						{connectedAccount ?? 'Connect Wallet'}
 					</button>
 					{/* <GetStarted /> */}
 				</div>

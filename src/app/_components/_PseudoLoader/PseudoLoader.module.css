@@ -1,5 +1,5 @@
 .loadingCon_ {
-	background: #000;
+	background: #ffffff;
 	gap: 20px;
 	/* position: fixed; */
 	padding: 30px;
@@ -51,12 +51,12 @@
 }
 
 .indicatorCon.active {
-	border-color: var(--blue) !important;
+	border-color: #0D61F8 !important;
 	transform: scale(1.2, 1.2);
 }
 
 .indicator.active {
-	background: var(--blue) !important;
+	background: #0D61F8 !important;
 }
 
 .loadingCon {

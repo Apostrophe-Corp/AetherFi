@@ -1231,6 +1231,7 @@ const MainContextProvider = ({ children }) => {
 				}
 			} catch (err) {
 				const errorMessage = getErrorMessage(err)
+				console.log({err})
 				// setCanCloseModal((x) => true)
 				showAlert({
 					title: 'Failed',

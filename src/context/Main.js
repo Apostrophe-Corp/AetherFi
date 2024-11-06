@@ -975,7 +975,7 @@ const MainContextProvider = ({ children }) => {
 	const transfer = async ({ totalASADue, res }) => {
 		showLoading()
 		let asaInfo = {}
-		if (res.success && res.data?.walletAddress) {
+		if (res.walletAddress) {
 			asaInfo = await getASAInfo(USDC)
 			const asaBal = (await getBalance(USDC)) / 10 ** asaInfo?.decimals
 			if (asaBal < totalASADue) {
@@ -1054,6 +1054,18 @@ const MainContextProvider = ({ children }) => {
 					message: `Transfer unsuccessful`,
 				}
 			}
+		}
+		showAlert({
+			title: 'Failed',
+			message: `Your transfer of ${trimOverkill(
+				totalASADue,
+				2
+			)} USDC was unsuccessful.`,
+		})
+		setCanCloseModal(() => true)
+		return {
+			success: false,
+			message: `Transfer unsuccessful`,
 		}
 	}
 

@@ -1216,22 +1216,22 @@ const MainContextProvider = ({ children }) => {
 				const signedTxn = await signTransactions([...txnsWrapper])
 				const { id } = await sendTransactions(signedTxn, waitRoundsToConfirm)
 				txID = id
-				const res = await makeRequest({
-					path: `airdrop/${res.data?.airdropID}`,
+				const res1 = await makeRequest({
+					path: `airdrop/${res1.data?.airdropID}`,
 					method: 'patch',
 					body: {},
 				})
 				retrievePlatformData()
-				if (res.success) {
+				if (res1.success) {
 					showAlert({
 						title: 'Success',
 						message: `Airdrop successfully created`,
 					})
-					return res
+					return res1
 				}
 			} catch (err) {
 				const errorMessage = getErrorMessage(err)
-				console.log({err})
+				console.log({ err })
 				// setCanCloseModal((x) => true)
 				showAlert({
 					title: 'Failed',

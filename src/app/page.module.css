@@ -83,7 +83,7 @@
 	background-position: center 30px;
 	background-size: 80% auto;
 	background-repeat: no-repeat;
-	padding: 70px 0 0;
+	padding: 70px 0 30px;
 }
 
 .baseImage {
@@ -135,6 +135,10 @@
 	.bMiniText {
 		text-align: center !important;
 	}
+
+	.b2 {
+		padding: 90px 0 30px;
+	}
 }
 
 /* Tiny device */
@@ -150,6 +154,11 @@
 
 	.bMiniText {
 		font-size: 14px !important;
+	}
+
+	.b2 {
+		padding: 65px 0 10px;
+		background-size: 90% auto;
 	}
 }
 

@@ -41,8 +41,10 @@
     font-style: normal;
     font-weight: 400;
     border: none;
-    border-right: 1px solid var(--blue);
+    border-right: 1px solid;
+    border-color: var(--blue);
     padding: 5px 0 5px 10px;
+    animation: flicker linear 1.5s infinite;
 }
 
 .controls {}
@@ -55,6 +57,20 @@
     font-weight: 700;
     color: var(--blue);
     padding: 17px;
+}
+
+@keyframes flicker {
+    0% {
+        border-color: var(--blue);
+    }
+
+    50% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: var(--blue);
+    }
 }
 
 /* --------------------------- Media Queries ------------------------- */

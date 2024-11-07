@@ -1,7 +1,7 @@
 'use client'
 
 import { ADMIN_ADDRESS, NETWORK, USDC } from '@/constants'
-import { useAuth, useDebouncedEffect } from '@/hooks'
+import { useAuth, useDebouncedEffect, useThrottle } from '@/hooks'
 import {
 	deBounce,
 	getASAInfo,
@@ -951,7 +951,7 @@ const MainContextProvider = ({ children }) => {
 		getAirdrops('active')
 		getVendors()
 		if (user?.userID && user?.accessToken) {
-			getUserAirdrops()
+			// getUserAirdrops()
 		}
 		if (roleIsAdmin) {
 		}
@@ -1450,6 +1450,8 @@ const MainContextProvider = ({ children }) => {
 			timer.current = undefined
 		}
 	)
+
+	useThrottle(retrievePlatformData, [activeAccount?.address], 10000)
 
 	useEffect(() => {
 		window.scrollTo({

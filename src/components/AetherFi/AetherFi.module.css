@@ -3,6 +3,7 @@
     border: none;
     border-radius: 8px;
     width: max(70%, 100px);
+    overflow: hidden;
 }
 
 .aetherFi {
@@ -57,6 +58,11 @@
     font-weight: 700;
     color: var(--blue);
     padding: 17px;
+    background: transparent;
+}
+
+.control:nth-of-type(2) {
+    animation: showoff linear 3s infinite;
 }
 
 @keyframes flicker {
@@ -70,6 +76,20 @@
 
     100% {
         border-color: var(--blue);
+    }
+}
+
+@keyframes showoff {
+    0% {
+        background: transparent;
+    }
+
+    50% {
+        background: #333333;
+    }
+
+    100% {
+        background: transparent;
     }
 }
 

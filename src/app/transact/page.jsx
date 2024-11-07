@@ -409,7 +409,7 @@ export default function Page() {
 				</span>
 				<div className={cf(s.wMax, s.flex, s.flexTop, p.wrapper)}>
 					<div className={cf(s.flex, s.flexLeft, s.flex_dColumn, p.navigator)}>
-						<ConnectedWallet />
+						<ConnectedWallet cClass={p.connectWrapper} />
 						<div className={cf(s.wMax, s.flex, s.flexCenter, p.navigators)}>
 							<Navigator
 								tag={'Transfer'}

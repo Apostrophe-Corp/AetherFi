@@ -349,11 +349,20 @@ const ConnectWallet = ({ showRegister = true }) => {
 	)
 }
 
-export function ConnectedWallet() {
+export function ConnectedWallet({ cClass = '' }) {
 	const { activeAccount, providers } = useWallet()
 	const { setUserNFD, isTiny, copyToClipboard } = useMain()
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter, s.g10, c.wrapOrWrappers)}>
+		<div
+			className={cf(
+				s.wMax,
+				s.flex,
+				s.flexCenter,
+				s.g10,
+				c.wrapOrWrappers,
+				cClass
+			)}
+		>
 			<div
 				className={cf(
 					s.wMax,

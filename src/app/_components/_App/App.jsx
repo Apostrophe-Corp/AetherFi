@@ -12,7 +12,16 @@ const Container = ({ c, children }) => {
 
 const App = ({ children }) => {
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexTop, s.p_relative, a.app)}>
+		<div
+			className={cf(
+				s.wMax,
+				s.flex,
+				s.flexLeft,
+				s.flex_dColumn,
+				s.p_relative,
+				a.app
+			)}
+		>
 			<Container c={cf(a.navBar)}>
 				<NavBar />
 			</Container>

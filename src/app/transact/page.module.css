@@ -20,7 +20,6 @@
 .navigator {
     width: 350px;
     gap: 20px;
-
 }
 
 .viewPort {
@@ -136,10 +135,61 @@
 @media only screen and (max-width: 950px) and (orientation: landscape) {}
 
 /* Small device */
-@media only screen and (max-width: 834px) {}
+@media only screen and (max-width: 834px) {
+    .page {
+        padding: 40px 0;
+    }
+
+    .navigator {
+        width: 100% !important;
+        /* gap: 20px; */
+        flex-direction: row !important;
+        align-items: normal !important;
+        justify-content: space-between !important;
+    }
+
+    .connectWrapper,
+    .navigators {
+        width: calc(50% - 15px) !important;
+    }
+
+    .connectWrapper {
+        order: 2 !important;
+    }
+
+    .navigators {
+        order: 1 !important;
+    }
+}
 
 /* Tiny device */
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+    .page {
+        padding: 20px 0;
+    }
+
+    .welcome {
+        margin-bottom: 5px !important;
+    }
+
+    .connectWrapper,
+    .navigators {
+        width: 100% !important;
+    }
+
+    .connectWrapper {
+        order: 1 !important;
+    }
+
+    .navigators {
+        order: 2 !important;
+    }
+
+    .viewPort {
+        width: 100% !important;
+        padding: 20px !important;
+    }
+}
 
 /* Super Tiny device */
 @media only screen and (max-width: 360px) {}

@@ -3,6 +3,7 @@
 	overflow-x: hidden;
 	/* padding-top: 185px; */
 	max-width: 1600px;
+	min-height: 100vh;
 }
 
 .tinyWrapper {
@@ -34,6 +35,7 @@
 
 .footer {
 	z-index: 1;
+	margin-top: auto;
 }
 
 .airdropDetails {

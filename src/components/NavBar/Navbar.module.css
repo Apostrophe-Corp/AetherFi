@@ -65,10 +65,56 @@
 @media only screen and (max-width: 950px) and (orientation: landscape) {}
 
 /* Small device */
-@media only screen and (max-width: 834px) {}
+@media only screen and (max-width: 834px) {
+    .branding {
+        margin-right: 20px !important;
+    }
+
+    .action {
+        font-size: 14px !important;
+        margin-right: 10px !important;
+    }
+
+    .connectWallet {
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
 
 /* Tiny device */
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+    .parent {
+        padding-bottom: 10px !important;
+    }
+
+    .branding {
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        padding-bottom: 10px;
+    }
+
+    .brandingImage {
+        width: 100px;
+        height: auto;
+        flex-shrink: 0;
+    }
+
+    .secondPart {
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .connectWallet {
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
 
 /* Super Tiny device */
 @media only screen and (max-width: 360px) {}

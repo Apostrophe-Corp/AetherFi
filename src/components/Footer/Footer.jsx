@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import f from './Footer.module.css'
+import { Container } from '../Container'
 
 const CustomLink = ({ to, target, localLink = false, children, className }) => {
 	const router = useRouter()
@@ -44,7 +45,16 @@ const Footer = () => {
 				s.container,
 				f.footer
 			)}
-		></div>
+		>
+			<Container>
+				<div className={cf(s.wMax, s.flex, s.spaceXBetween, f.inner)}>
+					<span className={cf(s.dInlineBlock, f.aetherfi)}>AetherFi</span>
+					<span className={cf(s.dInlineBlock, f.rights)}>
+						&copy; Apostrophe Corp. • 2024
+					</span>
+				</div>
+			</Container>
+		</div>
 	)
 }
 

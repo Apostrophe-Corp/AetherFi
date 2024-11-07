@@ -34,7 +34,8 @@ const Action = ({ isButton, callback, tag, cName }) => {
 }
 
 export default function Navbar() {
-	const { showConnectWallet, userNFD, showAlert, setUserNFD } = useMain()
+	const { showConnectWallet, userNFD, showAlert, setUserNFD, isSmall, isTiny } =
+		useMain()
 	const { activeAccount } = useWallet()
 	const [connectedAccount, setConnectedAccount] = useState(null)
 

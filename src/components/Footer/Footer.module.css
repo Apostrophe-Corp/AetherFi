@@ -1,98 +1,24 @@
 .footer {
-	max-width: 1600px;
-	margin: 0 auto;
-	bottom: 0;
+	background: var(--blue);
+	padding: 10px 0 15px;
 }
 
-.upperHalf {
-	padding: 44px 0;
-	border-bottom: 1px solid #2c2c2c;
-	gap: 40px;
-}
-
-.followUs {
-	color: #fff;
-	font-family: var(--font-roboto);
-	font-size: 18px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 150%;
-	/* 27px */
-}
-
-.iconHouse {
-	gap: 24px;
-}
-
-.icon {
-	height: 26px;
-}
-
-.youtube {
-	width: 34px;
-}
-
-.discord {
-	width: 33px;
-}
-
-.x {
-	width: 29px;
-}
-
-.lowerHalf {
-	padding: 44px 0 50px;
-}
-
-.innerLowerFirstHalf {}
-
-.logo {
-	width: 206px;
-	height: 42px;
-	margin-right: 70px;
-}
-
-.logoImg {
-	width: 100% !important;
-	height: auto !important;
-	aspect-ratio: auto;
-	object-fit: contain;
-	object-position: center;
-}
-
-.contactLink {
-	margin-right: 55px;
-}
-
-.vrCopyRights {
-	color: #fff;
-	text-align: right;
-	font-family: var(--font-roboto);
-	font-size: 18px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 150%;
-	/* 27px */
-}
-
-.cusViewReward {
-	font-size: 15px;
-}
-
-.cusHyphen {
+.aetherfi {
+	color: #fff !important;
+	font-family: var(--font-inter);
 	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 110%;
 }
 
-.cusProp {
-	font-size: 14px;
-}
-
-.fontRoboto {
-	font-family: var(--font-roboto) !important
-}
-
-.mR20 {
-	margin: 0 20px 0 0 !important;
+.rights {
+	color: #fff !important;
+	font-family: var(--font-inter);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 110%;
 }
 
 /* --------------------------- Media Queries ------------------------- */
@@ -109,77 +35,12 @@
 @media only screen and (max-width: 1180px) and (orientation: landscape) {}
 
 /* Small device */
-@media only screen and (max-width: 834px) {
-	.upperHalf {
-		border: none !important;
-		padding-bottom: 0 !important;
-	}
-
-	.iconHouse {
-		padding: 0 0 !important;
-	}
-
-	.logo {
-		display: none !important;
-	}
-}
+@media only screen and (max-width: 834px) {}
 
 /* Tiny device */
 @media only screen and (max-width: 480px) {
-	.footer {
-		padding-top: 20px !important;
-		margin-top: 52px !important;
-	}
-
-	.logo {
-		display: flex !important;
-		margin: 0;
-		width: 70%;
-		object-fit: contain;
-		object-position: left center;
-		margin-bottom: 20px;
-	}
-
-	.footer::before {
-		position: relative;
-		width: calc(100% - 40px);
-		margin: 0 auto;
-		content: '';
-		display: flex;
-		height: 1px;
-		background-color: #2C2C2C;
-		position: absolute;
-		top: 0;
-	}
-
-	.lowerHalf {
-		padding: 30px 0 !important;
-	}
-
-	.innerLowerFirstHalf {
-		justify-content: flex-start !important;
-	}
-
-	.pseudoFooterSocial {
-		width: 100% !important;
-		text-align: left !important;
-		justify-content: flex-start !important;
-		font-size: 14px !important;
-		font-family: var(--font-roboto) !important;
-		padding: 0 0 0 10px;
-	}
-
-	.contactLink {
-		margin: 0 !important;
-		margin-bottom: 17px !important;
-	}
-
-	.vrCopyRights {
-		margin-top: 28px !important;
-		font-size: 12px !important;
-	}
-
-	.mR20 {
-		margin: 0 20px 0 0 !important;
+	.inner {
+		justify-content: center !important;
+		gap: 10px !important;
 	}
 }

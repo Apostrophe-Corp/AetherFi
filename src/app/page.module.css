@@ -107,10 +107,46 @@
 @media only screen and (max-width: 950px) and (orientation: landscape) {}
 
 /* Small device */
-@media only screen and (max-width: 834px) {}
+@media only screen and (max-width: 834px) {
+	.page {
+		padding: 40px 0;
+	}
+
+	.bannerCon {
+		justify-content: center !important;
+		gap: 20px !important;
+	}
+
+	.b1 {
+		gap: 20px !important;
+	}
+
+	.bText {
+		font-size: 40px !important;
+		line-height: 60px !important;
+	}
+
+	.bText,
+	.bMiniText {
+		text-align: center !important;
+	}
+}
 
 /* Tiny device */
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+	.bText {
+		font-size: 30px !important;
+		line-height: 40px !important;
+	}
+
+	.page {
+		padding: 20px 0;
+	}
+
+	.bMiniText {
+		font-size: 14px !important;
+	}
+}
 
 /* Super Tiny device */
 @media only screen and (max-width: 360px) {}

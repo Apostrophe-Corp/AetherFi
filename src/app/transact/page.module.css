@@ -188,6 +188,7 @@
     .viewPort {
         width: 100% !important;
         padding: 20px !important;
+        gap: 20px !important;
     }
 }
 

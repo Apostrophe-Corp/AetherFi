@@ -75,10 +75,15 @@
 }
 
 .b2 {
+	padding: 20px 0;
 	width: 560px;
 	border-radius: 24px;
 	border: 1px solid #E2E4E9;
-	background: rgba(13, 97, 248, 0.05);
+	background: rgba(13, 97, 248, 0.05) url('./../assets/img/base.png');
+	background-position: center 30px;
+	background-size: 80% auto;
+	background-repeat: no-repeat;
+	padding: 70px 0 0;
 }
 
 .baseImage {

@@ -11,6 +11,7 @@ import { GetStartedBlue } from '@/components/GetStartedBlue'
 import shield from '@/assets/svg/shield-heart.svg.svg'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
+import { AetherFi } from '@/components/AetherFi'
 
 const Home = () => {
 	const { isSmall, isTiny, showConnectWallet } = useMain()
@@ -113,12 +114,13 @@ const Home = () => {
 							<></>
 						)}
 					</div>
-					<div className={cf(s.flex, s.flexBottom, p.b2)}>
-						<Image
+					<div className={cf(s.flex, s.flexCenter, p.b2)}>
+						{/* <Image
 							src={base}
 							alt={'phone cropped'}
 							className={cf(s.flex, s.flexCenter, p.baseImage)}
-						/>
+						/> */}
+						<AetherFi />
 					</div>
 				</div>
 			</Container>

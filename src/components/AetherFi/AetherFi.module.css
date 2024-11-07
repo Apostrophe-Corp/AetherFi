@@ -1,0 +1,83 @@
+.parent {
+    background: #2b2b2b;
+    border: none;
+    border-radius: 8px;
+    width: max(70%, 100px);
+}
+
+.aetherFi {
+    color: #eeeeee;
+    font-family: var(--font-inter);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.menu {
+    padding: 0 15px 10px;
+    gap: 5px;
+}
+
+.option {
+    width: 100%;
+    color: #eeeeee;
+    font-family: var(--font-inter);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%;
+}
+
+.inputCon {
+    border: none;
+    border-bottom: 2px solid var(--blue);
+}
+
+.input {
+    color: #eeeeee;
+    font-family: var(--font-inter);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    border: none;
+    border-right: 1px solid var(--blue);
+    padding: 5px 0 5px 10px;
+}
+
+.controls {}
+
+.control {
+    width: 50%;
+    font-family: var(--font-inter);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blue);
+    padding: 17px;
+}
+
+/* --------------------------- Media Queries ------------------------- */
+/* iPad Air landscape */
+@media only screen and (max-width: 1180px) and (orientation: landscape) {}
+
+/* iPad Pro */
+@media only screen and (max-width: 1024px) {}
+
+/* iPad Mini landscape */
+@media only screen and (max-width: 1024px) and (orientation: landscape) {}
+
+/* Special (Range of iPad Pro - iPad Mini)*/
+@media only screen and (max-width: 1024px) and (min-width: 835px) {}
+
+/* Mobile landscape */
+@media only screen and (max-width: 950px) and (orientation: landscape) {}
+
+/* Small device */
+@media only screen and (max-width: 834px) {}
+
+/* Tiny device */
+@media only screen and (max-width: 480px) {}
+
+/* Super Tiny device */
+@media only screen and (max-width: 360px) {}

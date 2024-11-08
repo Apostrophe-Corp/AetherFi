@@ -104,7 +104,7 @@ export default function Navbar() {
 						className={cf(s.flex, s.flexCenter, n.connectWallet)}
 						onClick={() => showConnectWallet()}
 					>
-						{connectedAccount ?? 'Connect Wallet'}
+						{activeAccount?.address ? connectedAccount : 'Connect Wallet'}
 					</button>
 					{/* <GetStarted /> */}
 				</div>

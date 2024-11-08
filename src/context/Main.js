@@ -1443,7 +1443,7 @@ const MainContextProvider = ({ children }) => {
 			}, 120000)
 			retrievePlatformData()
 		},
-		[tempAddress],
+		[activeAccount?.address],
 		3000,
 		() => {
 			clearTimeout(timer.current)
@@ -1451,7 +1451,13 @@ const MainContextProvider = ({ children }) => {
 		}
 	)
 
-	useThrottle(retrievePlatformData, [activeAccount?.address], 10000)
+	useThrottle(
+		() => {
+			retrievePlatformData()
+		},
+		[activeAccount?.address],
+		3000
+	)
 
 	useEffect(() => {
 		window.scrollTo({
